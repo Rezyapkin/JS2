@@ -36,7 +36,7 @@ class Hamburger {
         this.ingridiet = ingridiet;
         this.size = size;
         this.spices = [];
-        calculateAll();
+        this.calculateAll();
     }
 
     calcPrice() {
@@ -50,13 +50,13 @@ class Hamburger {
     }
 
     calculateAll() {
-        calcPrice();
-        calcCal();        
+        this.calcPrice();
+        this.calcCal();        
     }
 
     addSpice(spice) {
         this.spices.push(spice);
-        calculateAll();
+        this.calculateAll();
     }
 
 }
@@ -71,7 +71,10 @@ const bigSize = new SizeOfHamburger('Большой', 100, 40);
 const spice1 = new Spice("Специи", 15);
 const mayonnaise = new Spice("Майонез", 20, 5);
 
-myBurger = new Hamburger(bigSize, salad);
-myBurger.addSpice()
+const myBurger = new Hamburger(bigSize, salad);
+myBurger.addSpice(spice1);
+myBurger.addSpice(mayonnaise);
+
+console.log(myBurger.price);
 
 
