@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 3</title>
+</head>
+<body>
+    <div id="ajax-block"></div>
+    <button id="ajax-get">Async get data</button>
+<script>
+    // let user = '{"name": "Ann", "age": 25, "isAdmin": true}';
+    // // console.log(user);
+    // const ann = JSON.parse(user);
+    // console.log(ann);
+    // ann.dateCreated = '2020-04-15';
+    // ann.address = {
+    //     city: 'Moscow',
+    //     postalCode: 109400,
+    // };
+    // // console.log(ann);
+    // const userJson = JSON.stringify(ann, ['name', 'dateCreated', 'address', 'city', 'postalCode'], 4);
+    // console.log(userJson);
+    //
+    // let user2 = JSON.parse(userJson, (key, value) => {
+    //     // console.log(key, value);
+    //     if (key === 'dateCreated') {
+    //         value = new Date(value);
+    //     }
+    //
+    //     return value;
+    // });
+    // console.log(user2);
+
+    // const num = () => {
+    //     let b;
+    //     setTimeout(() => {
+    //         b = 20;
+    //     }, 500);
+    //     return b;
+    // };
+
+    // CllBack
+    // const num = (a, cb) => {
+    //     setTimeout(() => {
+    //         cb(a + 20);
+    //     }, 500);
+    // };
+    // // elem.addEventListener('click', () => {console.log('121212');});
+    //
+    // function callBack(result) {
+    //     console.log(result);
+    // }
+    //
+    // // num(10, function (result) {
+    // //     console.log(result);
+    // // });
+    // num(10, callBack);
+
+    // Promise
+    // const num = (a) => {
+    //     return new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             if (a) {
+    //                 resolve({ status: 'ok', data: a + 10 }); // then callback
+    //             } else {
+    //                 reject({ status: 'error', data: 'Error!' }); // catch callback
+    //             }
+    //         }, 1000);
+    //     });
+    // }
+    //
+    // async function asyncFunc(a) {
+    //     const result = await num(a);
+    //
+    //     console.log(result.data + 100);
+    // }
+    //
+    // asyncFunc(20);
+    // console.log(num(10).then((result) => {
+    //     console.log(result);
+    // }).catch((error) => {
+    //     console.log(error);
+    // }))
+
+    window.onload = () => {
+        document.getElementById('ajax-get').addEventListener('click', () => {
+            // ES5
+            // var xhr = new XMLHttpRequest();
+            //
+            // xhr.open('GET', 'tel.json', true); // true - асинхронный запрос
+            //
+            // xhr.onreadystatechange = () => {
+            //     // xhr.readyState;
+            //     // 0 - запрос не инициальзирован
+            //     // 1 - загрузка данных
+            //     // 2 - запрос принят сервером
+            //     // 3 - идет обмен данными
+            //     // 4 - запрос выполнен
+            //
+            //     if (xhr.readyState !== 4) return;
+            //
+            //     if (xhr.status !== 200) {
+            //         console.log(`Error ${xhr.status} ${xhr.responseText}`);
+            //     } else {
+            //         console.log(`Ok! `, xhr.responseText);
+            //         let data = JSON.parse(xhr.responseText);
+            //         let block = document.getElementById('ajax-block');
+            //         block.insertAdjacentHTML('beforeend', `<p>${data.name} - <strong>${data.tel}</strong></p>`);
+            //     }
+            // };
+            //
+            // xhr.send();
+
+            // ES6
+            // fetch('tel.json')
+            //     .then((response) => {
+            //         // console.log(response);
+            //         return response.json();
+            //     })
+            //     .then((data) => {
+            //         // console.log(data);
+            //         let block = document.getElementById('ajax-block');
+            //         block.insertAdjacentHTML('beforeend', `<p>${data.name} - <strong>${data.tel}</strong></p>`);
+            //     })
+            //     .catch((error) => {
+            //         console.log(error);
+            //     })
+        });
+    }
+</script>
+</body>
+</html>
