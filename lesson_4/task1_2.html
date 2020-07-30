@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea {
+         width: 50%;
+         height: 200px;
+    }
+</style>
+<body>
+    <p>Исходный текст:</p>
+    <textarea id="input_text">
+
+    </textarea>
+   
+    <p>Результат:</p>    
+    <textarea id="output_text" disabled>
+
+    </textarea>    
+    <script>
+        'use strict';
+        const inputEl = document.getElementById('input_text');
+        const outputEl = document.getElementById('output_text');
+        inputEl.addEventListener('change', () => {
+            let regExp = /('\B|\B')/g;
+            outputEl.value = inputEl.value.replace(regExp,'"');
+        })
+    </script>
+</body>
+</html>

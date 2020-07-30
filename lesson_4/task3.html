@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    input, textarea {
+        width: 400px; 
+        margin: 10px;
+        padding: 10px;
+    }
+
+    label {
+        display:inline-block;
+        width: 200px;
+    }
+
+    textarea {
+        width: 600px;
+        height: 200px;
+    }  
+
+    button {
+        padding: 10px;
+    }    
+
+    .error_text {
+        color: red;
+        margin-bottom: 10px;
+    } 
+       
+    .red_border {
+        outline: 1px solid red;
+    }
+</style>
+
+<body>
+    <form>
+        <label for="name">Имя:</label><input type="text" id="name"><br>
+        <label for="phone">Телефон: </label><input type="text" id="phone"><br>
+        <label for="email">E-mail: </label><input type="text" id="email"><br>
+        <p>Сообщение:</p>
+        <textarea id="text"></textarea><br>
+        <div class="error_text"></div>
+        <button type="submit" id="button">Отправить</button>
+    </form>
+
+    <script>
+        'use strict';
+        //Можно было сделать на объектах, но время поджимало - сделал линейный код.
+        const templatesRegExp = {
+            'name': {
+                regExp: /[a-zа-я]+/i,
+                errorMessage: 'Имя должно содержать только буквы!' 
+            },
+            'phone': {
+                regExp: /^\+\d\(\d{3}\)\d{3}-\d{4}$/i,
+                errorMessage: 'Телефон должен быть в формате +7(000)000-0000' 
+            },
+            'email': {
+                regExp: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2-6}$/i,
+                errorMessage: 'E-mail должен иметь вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru'
+            },
+
+            'text': {
+                regExp: /.+/i,
+                errorMessage: 'Введите сообщение'
+            }
+        }
+
+        const btn = document.getElementById('button');
+        const error = document.querySelector('.error_text')
+
+        btn.addEventListener('click',(event) => {
+            error.innerHTML='';
+            let haveError = false;
+            
+            for (let key in templatesRegExp) {
+                let curEl = document.getElementById(key);
+                if (templatesRegExp[key].regExp.test(curEl.value)) {
+                    curEl.classList.remove('red_border'); 
+                } else
+                {
+                    haveError = true;
+                    curEl.classList.add('red_border');
+                    error.innerHTML += templatesRegExp[key].errorMessage+'<br>';
+                } 
+             }
+
+             if (haveError) {
+                 event.preventDefault();
+             }
+
+        });
+
+    </script>
+</body>
+</html>
