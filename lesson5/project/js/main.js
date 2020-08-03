@@ -6,7 +6,10 @@ const app = new Vue({
     catalogUrl: '/catalogData.json',
     products: [],
     filteredGoods: [],
+    productsInCart: [],
     imgCatalog: 'https://placehold.it/200x150',
+    imgCart: 'https://placehold.it/50x100',
+    isVisibleCart: false,
     searchLine: '',
   },
   methods: {
@@ -17,7 +20,25 @@ const app = new Vue({
             console.log(error);
           })
     },
-    addProduct(product) {
+    
+    addProduct(product) {    
+      this.getJson(`${API}/addToBasket.json`)
+      .then(data => {
+      if(data.result === 1){
+        let productId = +product.id_product;
+        let find = this.productsInCart.find(product => product.id_product === productId);
+        if(find){
+          find.quantity++;
+        } else {
+          let find = this.products.find(product => product.id_product === productId);
+          find.quantity = 1;
+          this.productsInCart.push(find);
+        }
+      } else {
+        alert('Error');
+      }
+    })
+
       console.log(product);
     },
 
